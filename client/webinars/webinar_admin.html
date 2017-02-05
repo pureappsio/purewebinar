@@ -1,0 +1,31 @@
+<template name="webinarAdmin">
+    <div class='row'>
+        <div class='col-md-8 webinar-title'>Admin Panel for {{name}}</div>
+    </div>
+    <div class='row voffset15'>
+        <div class='col-md-4'>
+            <video id="my-video" class="video-js vjs-16-9" controls muted preload="auto" data-setup="{}">
+            </video>
+        </div>
+        <div class='col-md-4'>
+        </div>
+    </div>
+    <div class='row voffset30'>
+        <div class='col-md-4'></div>
+        <div class='col-md-4 total-attendees'>
+            Webinar status: {{status}}
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-4'></div>
+        <div class='col-md-4'>
+            <button id='start-webinar' class='btn btn-block btn-primary'>Start Webinar</button>
+        </div>
+    </div>
+    <div class='row voffset15'>
+        <div class='col-md-3'></div>
+        <div class='col-md-6 total-attendees'>
+            Total attendees: {{totalAttendees}}
+        </div>
+    </div>
+</template>

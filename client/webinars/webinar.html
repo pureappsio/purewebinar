@@ -1,0 +1,58 @@
+<template name="webinar">
+    <div id='webinar-wait'>
+        {{#if webinarReady}}
+        <div class='row'>
+            <div class='col-md-2'></div>
+            <div class='col-md-8 webinar-welcome'>Your webinar is now ready! Join by clicking on the button below.</div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'></div>
+            <div class='col-md-4'>
+                <button class="btn btn-block btn-primary btn-lg" id='join-webinar'>Join the Webinar</button>
+            </div>
+        </div>
+        {{else}}
+        <div class='row'>
+            <div class='col-md-2'></div>
+            <div class='col-md-8 webinar-welcome'>Your webinar will be starting soon.</div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'></div>
+            <div class='col-md-4'>
+                <button class="btn btn-block btn-primary btn-lg disabled">Join the Webinar</button>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    <div id='live-video'>
+        <div class='row'>
+            <div class='col-md-8 webinar-title'>{{name}}</div>
+        </div>
+        <div class='row voffset15'>
+            <div class='col-md-8'>
+                <video id="my-video" class="video-js vjs-16-9" muted preload="auto" data-setup="{}">
+                </video>
+            </div>
+            <div class='col-md-4'>
+            </div>
+        </div>
+    </div>
+    <div id='initial-signup'>
+        <div class='row'>
+            <div class='col-md-2'></div>
+            <div class='col-md-8 webinar-welcome'>Welcome to the {{name}} webinar! Please enter your nickname below to join the webinar.</div>
+        </div>
+        <div class='row voffset30' id='signup'>
+            <div class='col-md-4'></div>
+            <div class='col-md-4'>
+                <input class="form-control input-lg" id='attendee-name'>
+            </div>
+        </div>
+        <div class='row' id='signup'>
+            <div class='col-md-4'></div>
+            <div class='col-md-4'>
+                <button class="btn btn-block btn-primary btn-lg" id='enter-webinar'>Enter the Webinar</button>
+            </div>
+        </div>
+    </div>
+</template>

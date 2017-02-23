@@ -5,6 +5,9 @@ Template.webinar.events({
         $('#webinar-wait').hide();
         $('#live-video').show();
 
+        var myPlayer = videojs('#my-video');
+        myPlayer.muted(false);
+
     },
     'click #enter-webinar': function() {
 
@@ -26,6 +29,9 @@ Template.webinar.events({
             }
             if (webinarData.status == 'live') {
                 $('#live-video').show();
+                var myPlayer = videojs('#my-video');
+                myPlayer.muted(false);
+
             }
 
             // Set attendee

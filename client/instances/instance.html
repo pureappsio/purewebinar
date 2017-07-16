@@ -1,0 +1,19 @@
+<template name="instanceListing">
+    <div class='row'>
+        <div class='col-md-2'>
+            <a href='/webinars/{{_id}}'>{{formatDate date}}</a>
+        </div>
+        <div class='col-md-2'>
+            {{webinarName}}
+        </div>
+        <div class='col-md-1'>
+            {{webinarType}}
+        </div>
+        <div class='col-md-1'>
+            <a href='/instances/{{_id}}/attendees'>{{instanceAttendees}} attendees</a>
+        </div>
+        <div class='col-md-1'>
+            <button class='btn btn-danger delete-webinar'>X</button>
+        </div>
+    </div>
+</template>

@@ -3,10 +3,29 @@
     <h3>Webinar Source</h3>
     <div class='row'>
         <div class='col-md-3'>
-            <input class='form-control' id='webinar-source'>
+            <input value="{{getMeta 'source'}}" class='form-control' id='webinar-source'>
         </div>
         <div class='col-md-3'>
             <button id='save-source' class='btn btn-block btn-primary'>Save Source</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-3'>
+            <input value="{{getMeta 'authorName'}}" class='form-control' id='author-name'>
+        </div>
+        <div class='col-md-6'>
+            <input value="{{getMeta 'authorDescription'}}" class='form-control' id='author-description'>
+        </div>
+        <div class='col-md-3'>
+            <button id='save-author-data' class='btn btn-block btn-primary'>Save Author Data</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-3'>
+            {{> uploadForm imageId="authorPic"}}
+        </div>
+        <div class='col-md-3'>
+            <button id='save-author-pic' class='btn btn-block btn-primary'>Save Author Picture</button>
         </div>
     </div>
     {{/if}}

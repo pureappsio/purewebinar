@@ -1,7 +1,5 @@
 <template name="webinar">
-    <div id='webinar-wait'>
-        {{#if webinarReady}}
-        <div class='row'>
+    <!-- <div class='row'>
             <div class='col-md-2'></div>
             <div class='col-md-8 webinar-welcome'>Your webinar is now ready! Join by clicking on the button below.</div>
         </div>
@@ -10,21 +8,60 @@
             <div class='col-md-4'>
                 <button class="btn btn-block btn-primary btn-lg" id='join-webinar'>Join the Webinar</button>
             </div>
+        </div> -->
+    <div class='row' id='webinar-ready'>
+        <div class='col-md-1'></div>
+        <div class="col-md-10">
+            <div class='webinar-title'>{{webinarName}}</div>
+            <div class='row'>
+                <div class="col-md-9">
+                    <video id="my-video" class="video-js vjs-16-9" preload="auto" data-setup="{}">
+                    </video>
+                </div>
+                <div class="col-md-3">
+                    <div class="chat-area">
+                        {{#each messages}} {{> message}} {{/each}}
+                    </div>
+                    <input type="text" class="form-control" id="chat-text" placeholder="Write your message here ...">
+                </div>
+            </div>
         </div>
-        {{else}}
-        <div class='row'>
-            <div class='col-md-2'></div>
-            <div class='col-md-8 webinar-welcome'>Your webinar will be starting soon.</div>
+    </div>
+    <div class='row' id='webinar-wait'>
+        <div class='col-md-2'></div>
+        <div class="col-md-8">
+            <div class='col-md-7 col-center'>
+                <div class='starting-soon'>STARTING SOON ...</div>
+                <div class='webinar-options'>
+                    <div class='webinar-options-title'>YOU HAVE TWO OPTIONS NOW:</div>
+                    <div class='webinar-option'>
+                        <i class="fa fa-check" aria-hidden="true"></i> Come back at the webinar appointed time and date.
+                    </div>
+                    <div class='webinar-option'><i class="fa fa-check" aria-hidden="true"></i> Keep this page open, so when the countdown ticks to zero, you will be automatically redirected to the webinar live room.</div>
+                </div>
+            </div>
+            <div class='col-md-5 col-center'>
+                <div class='webinar-title'>{{webinarName}}</div>
+                <div class='webinar-date'>{{webinarDate}}</div>
+                <div class='author-block'>
+                    <div class="col-md-3">
+                        <img class="img-responsive author-pic" src="{{authorPic}}">
+                    </div>
+                    <div class="col-md-9 col-left">
+                        <div class='author-name'>{{getMeta 'authorName'}}</div>
+                        <div class='author-description'>{{getMeta 'authorDescription'}}</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class='row'>
+    </div>
+    <!-- <div class='row'>
             <div class='col-md-4'></div>
             <div class='col-md-4'>
                 <button class="btn btn-block btn-primary btn-lg disabled">Join the Webinar</button>
             </div>
-        </div>
-        {{/if}}
-    </div>
-    <div id='live-video'>
+        </div> -->
+    <!--  <div id='live-video'>
         <div class='row'>
             <div class='col-md-8 webinar-title'>{{name}}</div>
         </div>
@@ -36,7 +73,7 @@
             <div class='col-md-4'>
             </div>
         </div>
-    </div>
+    </div> -->
     <div id='initial-signup'>
         <div class='row'>
             <div class='col-md-2'></div>

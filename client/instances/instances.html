@@ -1,0 +1,9 @@
+<template name="instances">
+    <h3>New Webinar</h3> {{#autoForm collection="Instances" id="insertInstanceForm" type="insert"}}
+    <fieldset>
+        {{> afQuickField name='date'}} {{> afQuickField name='webinarId' type='select'}}
+    </fieldset>
+    <button type="submit" class="btn btn-block btn-primary">Insert</button>
+    {{/autoForm}}
+    <h3>Webinars Instances</h3> {{#each instances}}{{> instanceListing}}{{/each}}
+</template>

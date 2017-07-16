@@ -15,7 +15,11 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     {{#if currentUser}}
-                    <li><a href="{{pathFor 'dashboard'}}">Dashboard</a></li>
+                    <li><a href="{{pathFor 'webinars'}}">Webinars</a></li>
+                    <li><a href="{{pathFor 'brands'}}">Brands</a></li>
+                    <li><a href="{{pathFor 'instances'}}">Instances</a></li>
+                    <li><a href="{{pathFor 'attendees'}}">Attendees</a></li>
+
                     {{/if}}
                 </ul>
                 {{#if currentUser}}
@@ -25,6 +29,7 @@
                 {{/if}}
                 <ul class="nav navbar-nav navbar-right">
                     {{#if isAdmin}}
+                    <li><a href="{{pathFor 'settings'}}">Settings</a></li>
                     <li><a href="{{pathFor 'admin'}}">Admin</a></li>
                     {{/if}}
                 </ul>

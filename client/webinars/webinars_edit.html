@@ -1,0 +1,15 @@
+<template name="webinarEdit">
+    <h3>Edit Webinar {{name}}</h3> {{#autoForm collection="Webinars" doc=this id="insertWebinarForm" type="update" autosave=true}}
+    <fieldset>
+        {{> afQuickField name='name'}} {{> afQuickField name='url'}} {{> afQuickField name='type' type='select'}} {{> afQuickField name='brandId' type='select'}}
+        {{> afQuickField name='days'}} {{> afQuickField name='times'}}
+    </fieldset>
+    {{/autoForm}} {{#if isAutomated}}
+    <div class="row">
+        <div class="col-md-3">{{> uploadForm imageId="video"}}</div>
+        <div class="col-md-3">
+            <button id='save-video' class="btn btn-block btn-primary">Save Video</button>
+        </div>
+    </div>
+    {{/if}}
+</template>

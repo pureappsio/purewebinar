@@ -1,5 +1,103 @@
+import Images from '../imports/api/files';
+
 Meteor.methods({
 
+    insertMessage: function(message) {
+
+        console.log(message);
+
+        Messages.insert(message);
+
+    },
+    registerAttendee: function(attendee) {
+
+        // Check if attendee exists
+        if (Attendees.findOne({ email: attendee.email, instanceId: attendee.instanceId })) {
+
+            console.log('Already registered');
+
+        } else {
+
+            // Insert
+            var attendeeId = Attendees.insert(attendee);
+
+            // Create event
+            var event = {
+                instanceId: attendee.instanceId,
+                attendeeId: attendeeId,
+                date: new Date(),
+                type: 'registered'
+            }
+
+            Events.insert(event);
+
+        }
+
+    },
+    removeAttendee: function(attendeeId) {
+
+        // Remove
+        Attendees.remove(attendeeId);
+
+        // Remove all events
+        Events.remove({ attendeeId: attendeeId });
+
+    },
+    afterWebinarCreate: function(action, webinarId) {
+
+        var webinar = Webinars.findOne(webinarId);
+
+        var dates = Meteor.call('generateDates', webinarId);
+
+        for (i in dates) {
+
+            var instance = {
+                webinarId: webinarId,
+                date: dates[i]
+
+            }
+
+            Instances.insert(instance);
+
+        }
+
+
+    },
+    generateDates: function(webinarId) {
+
+        var webinar = Webinars.findOne(webinarId);
+        var days = webinar.days;
+        var times = webinar.times;
+
+        var outputDates = [];
+
+        for (d in days) {
+
+            for (i in times) {
+
+                var currentDate = new Date();
+
+                var dayDiff = days[d] - currentDate.getDay() + 7;
+                currentDate = new Date(currentDate.getTime() + dayDiff * 24 * 3600 * 1000);
+
+                if (times[i].period == 'pm') {
+
+                    currentDate.setHours(times[i].hour + 12);
+                } else {
+                    currentDate.setHours(times[i].hour);
+                }
+
+                currentDate.setMinutes(0);
+                currentDate.setSeconds(0);
+
+                outputDates.push(currentDate);
+            }
+
+        }
+
+        return outputDates;
+
+    },
     startWebinar: function(webinarId) {
 
         Webinars.update(webinarId, { $set: { status: 'live' } });
@@ -7,9 +105,38 @@ Meteor.methods({
     },
     setAttendeeInactive(attendeeId) {
 
-        console.log(attendeeId);
-        Attendees.update(attendeeId, { $set: { status: 'inactive' } });
+        // Get attendee
+        var attendee = Attendees.findOne(attendeeId);
 
+        // Create event
+        var event = {
+            instanceId: attendee.instanceId,
+            attendeeId: attendeeId,
+            date: new Date(),
+            type: 'inactive'
+        }
+
+        console.log(event);
+
+        Events.insert(event);
+
+    },
+    setAttendeeActive(attendeeId) {
+
+        // Get attendee
+        var attendee = Attendees.findOne(attendeeId);
+
+        // Create event
+        var event = {
+            instanceId: attendee.instanceId,
+            attendeeId: attendeeId,
+            date: new Date(),
+            type: 'active'
+        }
+
+        console.log(event);
+
+        Events.insert(event);
     },
     addAttendee: function(attendee) {
 
@@ -31,9 +158,25 @@ Meteor.methods({
         Webinars.insert(webinar);
 
     },
+    addVideoWebinar(videoId, webinarId) {
+
+        Webinars.update(webinarId, { $set: { videoId: videoId } });
+
+    },
     getStreamSource: function() {
 
         return Metas.findOne({ type: 'source' }).value;
+
+    },
+    getVideoSource: function(webinarId) {
+
+        var webinar = Webinars.findOne(webinarId);
+
+        if (webinar.videoId) {
+            return Images.findOne(webinar.videoId).link();
+        } else {
+            return "";
+        }
 
     },
     insertMeta: function(meta) {

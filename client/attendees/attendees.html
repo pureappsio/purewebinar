@@ -1,0 +1,9 @@
+<template name="attendees">
+    <h3>New Attendee</h3> {{#autoForm collection="Attendees" id="insertAttendeeForm" type="insert"}}
+    <fieldset>
+        {{> afQuickField name='email'}} {{> afQuickField name='name'}} {{> afQuickField name='instanceId' type='select'}}
+    </fieldset>
+    <button type="submit" class="btn btn-block btn-primary">Insert</button>
+    {{/autoForm}}
+    <h3>Attendees</h3> {{#each attendees}}{{> attendee}}{{/each}}
+</template>

@@ -1,6 +1,15 @@
 <template name="admin">
     {{#if isAdmin}}
-    <h3>Webinar Source</h3>
+    <h3>Admin</h3>
+    <div class='row'>
+        <div class='col-md-3'>
+            <button id='generate-key' class='btn btn-block btn-primary'>Generate API Key</button>
+        </div>
+        <div class='col-md-3'>
+            <span id='api-key'>{{key}}</span>
+        </div>
+    </div>
+    <!--   <h3>Webinar Source</h3>
     <div class='row'>
         <div class='col-md-6'>
             <input class='form-control' id='webinar-source' value='{{getMeta "source"}}'>
@@ -8,15 +17,6 @@
         <div class='col-md-3'>
             <button id='save-source' class='btn btn-block btn-primary'>Save Source</button>
         </div>
-    </div>
-    <h3>New Webinar</h3>
-    <div class='row'>
-        <div class='col-md-6'>
-            <input class='form-control' id='webinar-name'>
-        </div>
-        <div class='col-md-3'>
-            <button id='save-webinar' class='btn btn-block btn-primary'>Create New Webinar</button>
-        </div>
-    </div>
-    {{#each webinars}}{{> webinarListing}}{{/each}} {{/if}}
+    </div> -->
+    {{/if}}
 </template>

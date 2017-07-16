@@ -8,9 +8,15 @@ Template.webinarAdmin.events({
 
 Template.webinarAdmin.helpers({
 
+    webinarName: function() {
+
+        return Webinars.findOne(this.webinarId).name;
+
+    },
+
     totalAttendees: function() {
 
-        return Attendees.find({ webinarId: this._id, status: 'active' }).fetch().length;
+        return Events.find({ instanceId: this._id, type: 'active' }).count();
 
     }
 
@@ -18,22 +24,39 @@ Template.webinarAdmin.helpers({
 
 Template.webinarAdmin.onRendered(function() {
 
-    // Video
-    videojs("#my-video").ready(function() {
-        var myPlayer = this;
+    // Webinar video
+    if (this.data) {
 
-        myPlayer.pause()
-        Meteor.call('getStreamSource', function(err, streamSource) {
-            myPlayer.src({
-                src: streamSource,
-                type: 'application/x-mpegURL'
-            });
-            myPlayer.load();
-            myPlayer.play();
+        var webinarData = this.data;
+
+        videojs("#my-video").ready(function() {
+            var myPlayer = this;
+
+            myPlayer.pause()
+
+            if (webinarData.type == 'live') {
+                Meteor.call('getStreamSource', function(err, streamSource) {
+                    myPlayer.src({
+                        src: streamSource,
+                        type: 'application/x-mpegURL'
+                    });
+                    myPlayer.load();
+                    myPlayer.play();
+                });
+            }
+
+            if (webinarData.type == 'automated') {
+                Meteor.call('getVideoSource', webinarData._id, function(err, streamSource) {
+                    myPlayer.src({
+                        src: streamSource,
+                        type: 'video/mp4'
+                    });
+                    myPlayer.load();
+                });
+            }
+
         });
 
-    });
-
-
+    }
 
 });

@@ -1,0 +1,17 @@
+<template name="attendee">
+    <div class='row'>
+        <div class='col-md-3'>
+            {{email}}
+        </div>
+        <div class='col-md-1'>
+            {{name}}
+        </div>
+        <div class='col-md-1'>
+            <a href="/webinars/{{instanceId}}?attendee={{_id}}">Join Link</a>
+        </div>
+        <div class="col-md-1"><span class="label label-primary">{{status}}</span></div>
+        <div class='col-md-1'>
+            <i class="fa fa-trash fa-delete delete-attendee" aria-hidden="true"></i>
+        </div>
+    </div>
+</template>

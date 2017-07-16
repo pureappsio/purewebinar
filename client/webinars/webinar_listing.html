@@ -1,0 +1,19 @@
+<template name="webinarListing">
+    <div class='row'>
+        <div class='col-md-4'>
+            {{name}}
+        </div>
+        <div class='col-md-3'>
+            {{url}}
+        </div>
+        <div class='col-md-3'>
+            {{type}}
+        </div>
+        <div class='col-md-1'>
+            <a href='/webinars/{{_id}}/edit' class='btn btn-warning edit-webinar'>Edit</a>
+        </div>
+        <div class='col-md-1'>
+            <button class='btn btn-danger delete-webinar'>X</button>
+        </div>
+    </div>
+</template>
